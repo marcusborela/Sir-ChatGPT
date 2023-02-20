@@ -5,40 +5,6 @@ Development of a Simple Informational Retrieval System obtaining guidance with C
 <https://github.com/marcusborela/Sir-ChatGPT.git> 
 ### Autor: 
 Marcus Vinícius Borela de Castro (<marcusborela@yahoo.com.br>) 
-##
-
-# Sumário
-[SIR_ChatGPT	1](#_Toc127800154)
-
-[Github do Projeto:	1](#_Toc127800155)
-
-[Autor:	1](#_Toc127800156)
-
-[Contexto	1](#_Toc127800157)
-
-[Project Overview:	2](#_Toc127800158)
-
-[Project Outcomes:	2](#_Toc127800159)
-
-[Project Requirements:	2](#_Toc127800160)
-
-[Project Deliverables:	2](#_Toc127800161)
-
-[Evaluation:	2](#_Toc127800162)
-
-[Estudo prévio sobre ChatGpt	3](#_Toc127800163)
-
-[Recursos	3](#_Toc127800164)
-
-[Sites com reflexões e dicas sobre o chatbot	3](#_Toc127800165)
-
-[Extensões do Google  (em ordem de importância)	3](#_Toc127800166)
-
-[Conversas preliminares	4](#_Toc127800167)
-
-[Desenvolvimento do projeto	4](#_Toc127800168)
-
-
 
 ## Contexto 
 (deixei próximas seções em inglês para ser fiel à documentação recebida da Unicamp).
@@ -49,72 +15,44 @@ Objective
 
 To develop a small Information Retrieval project with the freedom to use chatGPT to help you in all phases of the project:
 
-i) to learn about IR,
-
-ii) to code it in Python, and
-
-iii) to write the report.
+- to learn about IR,
+- to code it in Python, and
+- to write the report.
 
 ### Project Overview:
-The aim of this project is to introduce students to the basics of Information Retrieval (IR) and
+The aim of this project is to introduce students to the basics of Information Retrieval (IR) and the BM25 ranking algorithm. 
 
-the BM25 ranking algorithm. The sollution to this project will help us to select the students to
+The sollution to this project will help us to select the students to attend the course on deep learning applied to search. The students will build a simple IR system that retrieves relevant documents from a pre-defined corpus based on the user's query. The students will also use the chatGPT to assist in all phases of the project. 
 
-attend the course on deep learning applied to search. The students will build a simple IR
-
-system that retrieves relevant documents from a pre-defined corpus based on the user's
-
-query. The students will also use the chatGPT to assist in all phases of the project. The
-
-coding will be done using Google Colab notebooks and the deliverables will be placed in
-
-github account.
+The coding will be done using Google Colab notebooks and the deliverables will be placed in github account.
 ### Project Outcomes:
 Upon completion of the project, students will have gained the following skills:
 
-Understanding of the BM25 ranking algorithm
-
-Familiarity with Information Retrieval systems
-
-Use of GitHub to store the notebooks and documentation
-
-Experience with chatGPT for help in find solutions and coding
-
-Exposure to Google Colab notebooks for code execution and presentation.
+- Understanding of the BM25 ranking algorithm
+- Familiarity with Information Retrieval systems
+- Use of GitHub to store the notebooks and documentation
+- Experience with chatGPT for help in find solutions and coding
+- Exposure to Google Colab notebooks for code execution and presentation.
 ### Project Requirements:
-Google Colab Notebook
-
-GitHub account
-
-chatGPT for help on all aspects of the project
-
-CISI collection: http://ir.dcs.gla.ac.uk/resources/test\_collections/cisi/
-
-Familiarity with Python programming
+- Google Colab Notebook
+- GitHub account
+- chatGPT for help on all aspects of the project
+- CISI collection: http://ir.dcs.gla.ac.uk/resources/test\_collections/cisi/
+- Familiarity with Python programming
 ### Project Deliverables:
 A github repository with:
 
-\- link shared with the instructors to evaluate the project contents
-
-\- all Google Colab notebooks and associated functions and libraries if any, with the
-
-code for the IR system
-
-\- A brief report describing the implementation details, results, how to test the IR
-
-system and how chatGPT helped you with the project.
+- - link shared with the instructors to evaluate the project contents
+- - all Google Colab notebooks and associated functions and libraries if any, with the code for the IR system
+- - A brief report describing the implementation details, results, how to test the IR system and how chatGPT helped you with the project.
 ### Evaluation:
 The project will be evaluated based on the following criteria:
 
-Completion of the project deliverables (partial is OK to submit)
-
-Implementation accuracy
-
-Quality of the report
-
-Code readability and commenting
-
-How chatGPT was used
+- Completion of the project deliverables (partial is OK to submit)
+- Implementation accuracy
+- Quality of the report
+- Code readability and commenting
+- How chatGPT was used
 ##
 ## Estudo prévio sobre ChatGpt 
 Antes de iniciar o projeto assistido pelo ChatGPT, precisava me atualizar sobre suas capacidades e desejava descobrir algumas ferramentas de apoio. Por isso criei esta seção.
