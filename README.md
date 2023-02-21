@@ -185,3 +185,43 @@ Onde:
 
 O MAP é uma medida útil para avaliar sistemas de recuperação de informações que retornam uma lista ordenada de documentos relevantes, como motores de busca.
 
+##### 1.4.5 R-Precision
+A métrica R-Precision é definida como a precisão dos primeiros R documentos recuperados para uma determinada consulta, onde R é o número de documentos relevantes para essa consulta. É uma métrica utilizada principalmente quando o número de documentos relevantes é conhecido. A fórmula para calcular a R-Precision é dada por:
+
+$$R-Precision = \frac{\text{Número de documentos relevantes nos primeiros R resultados}}{R}$$
+
+##### 1.4.6 NCG (Normalized Cumulative Gain)
+A métrica NCG (Normalized Cumulative Gain) é utilizada para medir a eficácia de um sistema de recuperação de informação, levando em consideração a posição de cada item na lista de resultados. A métrica assume que as avaliações de relevância são binárias, ou seja, um item é relevante ou não relevante. A NCG normaliza a medida de ganho acumulado (CG) pelo ideal máximo de ganho acumulado (ICG), a fim de levar em conta o número de itens relevantes.
+
+A fórmula da NCG é dada por:
+
+$$NCG@k = \frac{CG@k}{ICG@k}$$
+
+Onde:
+
+- $CG@k$ é o ganho acumulado na posição $k$.
+- $ICG@k$ é o ganho acumulado ideal na posição $k$.
+
+
+O ganho acumulado ideal (ICG) na posição $k$ é calculado da seguinte forma:
+
+$$ICG@k = \sum_{i=1}^k \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
+
+Onde:
+
+- $rel_i$ é o nível de relevância do documento na posição $i$ (0 ou 1).
+
+
+Por exemplo, se houver $n$ documentos relevantes, o ganho acumulado ideal nas primeiras $k$ posições seria:
+
+$$ICG@k = \sum_{i=1}^k \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
+$$ICG@k = \frac{2^{rel_1} - 1}{\log_2(1+1)} + \frac{2^{rel_2} - 1}{\log_2(2+1)} + ... + \frac{2^{rel_n} - 1}{\log_2(n+1)}$$
+
+O ganho acumulado (CG) na posição $k$ é dado por:
+
+$$CG@k = \sum_{i=1}^k \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
+
+Assim, a métrica NCG varia de 0 a 1, onde valores mais próximos de 1 indicam um sistema mais eficaz na recuperação de informações relevantes.
+
+
+***
