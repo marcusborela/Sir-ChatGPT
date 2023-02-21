@@ -93,5 +93,95 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 1. [Incentivo aos filhos para usarem ChatGpt](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Conversas%20preliminares%20com%20WebChatGPT/Incentivo%20aos%20filhos%20para%20usarem%20ChatGpt.pdf)
 
 ## Desenvolvimento do projeto
-## 
+
+[(relatório abaixo foi criado pelo ChatGPT ao final do diálogo que inclui a contextualização até a conclusão da fase de compreensão dos conceitos envolvidos no negócio)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
+
+
+### Relatório Fase 1 - Compreensão do Negócio
+#### 1.1 CISI Collection
+A CISI Collection é um conjunto de dados coletados pelo Centro de Invenções e Informação Científica (CISI) e é composto por cerca de 1460 documentos e 112 consultas associadas. O objetivo dessa coleção é ser usada para construir modelos de recuperação de informação, em que uma determinada consulta retornará uma lista de IDs de documentos relevantes à consulta.
+#### 1.2 Information Retrieval System (IR system)
+Um sistema de recuperação de informação (IR system) é um sistema que permite aos usuários encontrar informações relevantes para suas necessidades de informação. Os sistemas de recuperação de informação geralmente trabalham com grandes quantidades de dados não estruturados e permitem que os usuários recuperem informações usando palavras-chave, frases ou consultas complexas.
+
+Os principais módulos de um sistema de recuperação de informação são:
+
+- <strong>Coleta de dados</strong>: coleta de dados a partir de fontes como a web, bancos de dados, arquivos de texto, etc.
+- <strong>Pré-processamento</strong>: processamento dos dados coletados para melhorar a qualidade e a eficácia da recuperação da informação. Inclui a limpeza dos dados, remoção de stop words, stemming, entre outros.
+- <strong>Indexação</strong>: criação de um índice que mapeia as palavras encontradas nos documentos e consultas a seus respectivos documentos.
+- <strong>Recuperação</strong>: comparação das consultas com o índice criado na etapa anterior e retorno dos documentos relevantes para a consulta.
+- <strong>Avaliação</strong>: avaliação da eficácia do sistema de recuperação de informação. Isso inclui o cálculo de métricas de avaliação de recuperação, como precisão, revocação, F-measure, MAP, entre outras.
+
+#### 1.3 BM25
+O BM25 é um algoritmo de ranqueamento de documentos amplamente utilizado em sistemas de recuperação de informação. Foi proposto por Robertson e colaboradores em 1995. A fórmula do BM25 é dada por:
+
+```
+score(D,Q) = ∑(i∈Q) IDF(i) * ((k + 1) * tf(i,D)) / (k * (1 - b + b * (|D| / avgdl)) + tf(i,D))
+
+```
+
+onde:
+
+- `D` é um documento;
+- `Q` é uma consulta;
+- `tf(i,D)` é o número de vezes que o termo `i` aparece no documento `D`;
+- `|D|` é o comprimento do documento `D` em termos de número de palavras;
+- `avgdl` é o comprimento médio de todos os documentos na coleção;
+- `k` e `b` são constantes de ajuste do BM25;
+- `IDF(i)` é o inverso da frequência do documento para o termo `i` calculado como `log((N - n(i) + 0.5) / (n(i) + 0.5))`, onde `N` é o número de documentos na coleção e `n(i)` é o número de documentos que contêm o termo `i`.
+
+#### 1.4 Métricas de Relevância para Avaliação de IR
+As principais métricas
+
+As métricas de relevância são usadas para avaliar a eficácia de um sistema de recuperação de informações, determinando a relevância dos documentos recuperados para uma consulta. Algumas das principais métricas de relevância incluem:
+### Precisão (Precision)
+A precisão é a proporção de documentos recuperados que são relevantes para uma determinada consulta. É calculada pela fórmula:
+
+```
+Precision = |Documentos relevantes recuperados| / |Documentos recuperados|
+
+```
+
+Onde:
+
+- `|Documentos relevantes recuperados|`: número de documentos relevantes recuperados pelo sistema para a consulta.
+- `|Documentos recuperados|`: número total de documentos recuperados pelo sistema para a consulta.
+
+##### Revocação (Recall)
+A revocação é a proporção de documentos relevantes que foram recuperados pelo sistema em relação ao número total de documentos relevantes. É calculada pela fórmula:
+
+```
+Recall = |Documentos relevantes recuperados| / |Documentos relevantes|
+
+```
+
+Onde:
+
+- `|Documentos relevantes recuperados|`: número de documentos relevantes recuperados pelo sistema para a consulta.
+- `|Documentos relevantes|`: número total de documentos relevantes para a consulta.
+
+##### F1-Score
+O F1-score é uma medida que combina precisão e revocação em uma única métrica. É calculado pela fórmula:
+
+```
+F1 = 2 * (precision * recall) / (precision + recall)
+
+```
+##### Mean Average Precision (MAP)
+O MAP é uma medida que leva em conta a ordem dos documentos recuperados pelo sistema. Ele considera não apenas a precisão e a revocação, mas também o rank dos documentos relevantes retornados pelo sistema. O MAP é calculado pela fórmula:
+
+```
+MAP = (1/|Q|) * ∑_(i=1)^|Q| (1/rel_i) * ∑_(j=1)^|k| (P_j * rel_j)
+
+```
+
+Onde:
+
+- `|Q|`: número de consultas no conjunto de consultas.
+- `rel_i`: número total de documentos relevantes para a consulta `i`.
+- `k`: número máximo de documentos recuperados pelo sistema para a consulta `i`.
+- `P_j`: precisão na posição `j` dos documentos recuperados para a consulta `i`.
+- `rel_j`: indicador binário que indica se o documento na posição `j` é relevante ou não para a consulta `i`.
+
+
+O MAP é uma medida útil para avaliar sistemas de recuperação de informações que retornam uma lista ordenada de documentos relevantes, como motores de busca.
 
