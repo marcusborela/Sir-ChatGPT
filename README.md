@@ -97,15 +97,18 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 ### Chats durante o desenvolvimento da solução
 [Contextualização do projeto, definção de fases e execução da fase compreensão do negócio, incluindo a criação do Relatório Fase 1 (ver abaixo)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
 
+
+[Dúvidas avulsas (github, markdown, nomenclaturas, codificação fora do contexto de desenvolvimento, etc)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Dúvidas%20avulsas.md)
+
+A implementação e a avaliação da solução foram tratados em um único chat. Para legibilidade e clareza, separamos em 3 chats distintos que se seguem:
+
 [Programação em Par (pair programming) para a codificação das etapas de coleta de dados e de pré-processamento](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Coleta%20de%20dados%20e%20pr%C3%A9-processamento.md)
 
 
-[Programação em Par (pair programming) para a codificação da etapa de implementação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Indexacao.md)
+[Programação em Par (pair programming) para a codificação da etapa de implementação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Implementa%C3%A7%C3%A3o%20mecanismos%20de%20busca.md)
 
 [Programação em Par (pair programming) para a codificação da etapa de avaliação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Avaliação%20da%20busca.md)
 
-
-[Dúvidas avulsas (github, markdown, nomenclaturas, etc)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Dúvidas%20avulsas.md)
 
 
 ## Relatório final
