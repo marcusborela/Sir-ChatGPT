@@ -75,7 +75,7 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 1. [ChatGPT tutorial: How to improve your work with ChatGPT](https://lablab.ai/t/chatgpt-how-to-improve-your-work-with-chatgpt)
 1. [Get The Best ChatGPT Experience With These 10 Chrome Extensions](https://geekflare.com/best-chatgpt-chrome-extensions/)
 
-### Extensões do Google  (em ordem de importância)
+### Extensões do Google Chrome (em ordem de importância, critério subjetivo do autor)
 1. [WebChatGPT: ChatGPT com acesso à internet](https://chrome.google.com/webstore/detail/webchatgpt-chatgpt-with-i/lpfemeioodjbpieminkklglpmhlngfcn): permite busca informações atualizadas. Como o gpt-3 foi treinado em 2021, ele não traz respostas atualizadas (exemplo: quem é o presidente do Brasil?). Essa extensão permite que o chatgpt faça uma busca atualizada (configurável: período, número de resultados, etc) o que o torna ainda mais utilizável.
 1. [YouTube Summary with ChatGPT](https://chrome.google.com/webstore/detail/youtube-summary-with-chat/nmmicjeknamkfloonkhhcjmomieiodli): gera sumário do vídeo no youtube
 1. [FancyGPT](https://chrome.google.com/webstore/detail/fancygpt/meonalmakdjaojaoipfhahcfccoecegk?hl=pt-BR): salva como pdf, txt ou imagem (jpg).
@@ -94,10 +94,23 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 
 ## Desenvolvimento do projeto
 
-[(relatório abaixo foi criado pelo ChatGPT ao final do diálogo que inclui a contextualização até a conclusão da fase de compreensão dos conceitos envolvidos no negócio)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
+### Chats durante o desenvolvimento da solução
+[Contextualização do projeto, definção de fases e execução da fase compreensão do negócio, incluindo a criação do Relatório Fase 1 (ver abaixo)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
+
+[Programação em Par (pair programming) para a codificação das etapas de coleta de dados e de pré-processamento](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Coleta%20de%20dados%20e%20pr%C3%A9-processamento.md)
 
 
+[Programação em Par (pair programming) para a codificação da etapa de implementação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Indexacao.md)
+
+[Programação em Par (pair programming) para a codificação da etapa de avaliação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Avaliação%20da%20busca.md)
+
+
+[Dúvidas avulsas (github, markdown, nomenclaturas, etc)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Dúvidas%20avulsas.md)
+
+
+## Relatório final
 ### Relatório Fase 1 - Compreensão do Negócio
+[(relatório abaixo foi criado integralmente pelo ChatGPT ao final do diálogo que inclui a contextualização até a conclusão da fase de compreensão dos conceitos envolvidos no negócio)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
 #### 1.1 CISI Collection
 A CISI Collection é um conjunto de dados coletados pelo Centro de Invenções e Informação Científica (CISI) e é composto por cerca de 1460 documentos e 112 consultas associadas. O objetivo dessa coleção é ser usada para construir modelos de recuperação de informação, em que uma determinada consulta retornará uma lista de IDs de documentos relevantes à consulta.
 #### 1.2 Information Retrieval System (IR system)
@@ -224,4 +237,77 @@ $$CG@k = \sum_{i=1}^k \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
 Assim, a métrica NCG varia de 0 a 1, onde valores mais próximos de 1 indicam um sistema mais eficaz na recuperação de informações relevantes.
 
 
+Obs.: o relatório que se segue foi criado parcialmente (complementei e corrigi informações) pelo ChatGPT ao final dos diálogos acima indicados que abarcam cada fase.
+### Relatório Fase 2 - Implementação 
+
+
+Foi desenvolvida uma implementação em Python e o código é executado em ambiente google colab. Foram implementadas as seguintes etapas
+
+#### Coleta de dados da CISI Collection
+
+A coleção de documentos CISI é uma coleção de documentos acadêmicos que foi compilada por C. J. van Rijsbergen da Universidade de Glasgow. A coleção consiste em cerca de 15.000 resumos de artigos da área de Ciência da Informação, extraídos de revistas publicadas entre 1958 e 1972. Trata-se de um conjunto de documentos de teste amplamente utilizado em pesquisas de recuperação de informações. É composto por um total de 1460 documentos e 112 consultas. E traz uma associação entre consultas e seus documentos relevantes. 
+
+
+A implementação desenvolvida permite a coleta dos dados da coleção CISI diretamente do site oficial da Universidade de Glasgow, onde os dados estão disponíveis para download.
+
+
+Para a coleta de dados da CISI Collection, foram utilizados os seguintes passos:
+
+1. Baixar a coleção de documentos da CISI Collection de um repositório público;
+2. Extrair o conteúdo dos arquivos ZIP baixados para uma pasta local;
+3. Ler cada documento individualmente e armazenar seu conteúdo em uma estrutura de dados, como um dicionário, onde cada chave é o identificador do documento e o valor é o conteúdo do documento.
+#### Pré-processamento dos textos de documentos e consultas
+
+A implementação desenvolvida realiza as seguintes etapas de pré-processamento nos textos dos documentos e consultas: 
+
+Conversão dos caracteres para minúsculas: Os caracteres são convertidos para minúsculas, para evitar ambiguidades devido à diferença de capitalização entre as palavras.
+
+Remoção de caracteres especiais: Caracteres especiais, como pontos, vírgulas, parênteses, colchetes e chaves, são removidos para evitar a interferência desses caracteres na análise do texto.
+
+Remoção de stopwords: Stopwords, que são palavras comuns que não contribuem significativamente para o significado do texto, são removidas para evitar a interferência dessas palavras na análise do texto.
+
+Lematização: A lematização é um processo de normalização do texto, que consiste em reduzir as palavras às suas formas básicas (lemas), removendo as variações de tempo, número, gênero e modo. Esse processo ajuda a reduzir a dimensionalidade do espaço de características e a melhorar a precisão da análise do texto.
+
+A implementação permite a configuração da combinação de técnicas de pré-processamento desejada, permitindo que o usuário selecione quais técnicas serão aplicadas.
+
+A fução permite a flexibilidade de configurar a combinação de técnicas desejada. Foram elaborados testes de algumas funções utilizando a chamada do comando assert.
+
+#### Implementação de dois mecanismos de busca com BM25
+
+Foram criadas duas classes que implementam o modelo de ranqueamento BM25 para buscas em documentos. A primeira classe, denominada BM25, é implementada do zero e faz uso da biblioteca scikit-learn para calcular a matriz TF-IDF dos documentos. A segunda classe, denominada BM25_Penaliza_Tamanho_Docto, faz uso da biblioteca rank-bm25 para implementar o modelo BM25 e também considera o tamanho dos documentos durante o ranqueamento.
+
+##### BM25
+
+A classe BM25 implementa o modelo de ranqueamento BM25 para buscas em documentos. O modelo BM25 é uma função que mede a similaridade entre um documento e uma consulta. A implementação do modelo BM25 na classe BM25 leva em conta o número de ocorrências de um termo no documento, o número total de documentos na coleção, a frequência do termo na coleção e o comprimento do documento. A implementação do modelo BM25 é feita através do cálculo da pontuação BM25 de cada documento da coleção em relação à consulta, conforme Paiva (2020).
+
+A classe BM25 recebe como parâmetro uma lista de documentos pré-processados, juntamente com os parâmetros k1 e b, que são utilizados na equação acima para ajustar a frequência dos termos e o comprimento dos documentos. Para calcular a matriz TF-IDF dos documentos, a classe faz uso da biblioteca scikit-learn.
+
+A classe BM25 possui as seguintes funcionalidades:
+
+. _score(query_tf_idf, index): método que calcula a pontuação BM25 para um documento específico em relação a uma consulta. O método recebe como parâmetros o vetor TF-IDF da consulta e o índice do documento;
+
+. search(query, k=5): método que busca os k documentos mais relevantes para a consulta query. O método recebe como parâmetros a consulta e o número de documentos a serem retornados.
+
+##### BM25_Penaliza_Tamanho_Docto
+
+A classe BM25_Penaliza_Tamanho_Docto também implementa o modelo de ranqueamento BM25 para buscas em documentos, mas leva em conta o tamanho dos documentos durante o ranqueamento. A implementação do modelo BM25 considerando o tamanho dos documentos é feita através da biblioteca rank-bm25, que já possui uma implementação do modelo BM25 com essa consideração.
+
+A classe BM25_Penaliza_Tamanho_Docto recebe como parâmetro uma lista de documentos pré-processados. 
+Trata-se de uma variação do algoritmo BM25 que leva em consideração o tamanho do documento ao calcular a relevância de um termo de busca para um documento. A fórmula básica do BM25 considera apenas o número de ocorrências de um termo no documento e no corpus. No entanto, documentos mais longos podem ter uma contagem de ocorrências mais alta simplesmente porque têm mais palavras. Isso pode levar a uma classificação incorreta dos resultados da pesquisa.
+
+Para corrigir essa distorção, o BM25_Penaliza_Tamanho_Docto ajusta a contagem de ocorrências de um termo no documento com base no tamanho do documento em relação a um comprimento médio esperado. Isso é feito com a introdução de um fator de normalização que penaliza documentos mais longos e recompensa documentos mais curtos. O fator de normalização é calculado como (k1 * (1-b + b * (len_d / avg_len))) + 1, onde k1 e b são parâmetros ajustáveis, len_d é o comprimento do documento em questão e avg_len é o comprimento médio dos documentos no corpus.
+
+A classe possui a seguinte funcionalidade:
+
+. search(query, k=5): método que busca os k documentos mais relevantes para a consulta query. O método recebe como parâmetros a consulta e o número de documentos a serem retornados.
+
+
+### Relatório Fase 3 - Avaliação 
+
+## Reflexões sobre o projeto
+
+## Referências interessantes
+PAIVA, Clovis.Elasticsearch: entenda a teoria por trás do mecanismo de busca textual.In: medium.com.2020; Disponível em: [https://medium.com/tentando-ser-um-unic%C3%B3rnio/elasticsearch-entenda-a-teoria-por-tr%C3%A1s-do-mecanismo-de-busca-textual-86d11bd4f69d](https://medium.com/tentando-ser-um-unic%C3%B3rnio/elasticsearch-entenda-a-teoria-por-tr%C3%A1s-do-mecanismo-de-busca-textual-86d11bd4f69d). Acesso em: 22 fev. 2023. 
+
+[RICARDO, Baeza-Yates; BERTHIER, Ribeiro-Neto. Modern information retrieval: the concepts and technology behind search. New Jersey, USA: Addi-son-Wesley Professional, 2011.]Disponível em: [https://www.researchgate.net/publication/220688488_Modern_Information_Retrieval_the_Concepts_and_Technology_Behind_Search](https://www.researchgate.net/publication/220688488_Modern_Information_Retrieval_the_Concepts_and_Technology_Behind_Search). Acesso em: 22 fev. 2023. 
 ***
