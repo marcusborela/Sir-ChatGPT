@@ -43,6 +43,29 @@ Marcus Vinícius Borela de Castro (<marcusborela@yahoo.com.br>)
         - [BM25\_Penaliza\_Tamanho\_Docto](#bm25_penaliza_tamanho_docto)
     - [Relatório Fase 3 - Avaliação de mecanismos de busca](#relatório-fase-3---avaliação-de-mecanismos-de-busca)
   - [Reflexões sobre o projeto](#reflexões-sobre-o-projeto)
+    - [Limitações](#limitações)
+      - [Parece haver um limite no tamanho do texto gerado pelo WebChatGPT.](#parece-haver-um-limite-no-tamanho-do-texto-gerado-pelo-webchatgpt)
+      - [Parece haver um limite no tamanho do prompt gerado pelo WebChatGPT.](#parece-haver-um-limite-no-tamanho-do-prompt-gerado-pelo-webchatgpt)
+    - [Não sabe sempre](#não-sabe-sempre)
+    - [Às vezes complica e parece inventar coisas](#às-vezes-complica-e-parece-inventar-coisas)
+    - [Formato do prompt é importante](#formato-do-prompt-é-importante)
+    - [Funcionalidades faltando](#funcionalidades-faltando)
+      - [Falta um CRUD básico de chats no WebChatGPT](#falta-um-crud-básico-de-chats-no-webchatgpt)
+      - [Poderia ler sites da web](#poderia-ler-sites-da-web)
+    - [Inventa coisas](#inventa-coisas)
+    - [Às vezes é pró-ativo](#às-vezes-é-pró-ativo)
+    - [Erros no sistema](#erros-no-sistema)
+      - [“An error occurred. If this issue persists please contact us through our help center at help.openai.com. “](#an-error-occurred-if-this-issue-persists-please-contact-us-through-our-help-center-at-helpopenaicom-)
+      - ["Too many requests in 1 hour. Try again later."](#too-many-requests-in-1-hour-try-again-later)
+      - [“ChatGPT is at capacity right now.  Get notified when we're back”](#chatgpt-is-at-capacity-right-now--get-notified-when-were-back)
+      - [“An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.”](#an-error-occurred-either-the-engine-you-requested-does-not-exist-or-there-was-another-issue-processing-your-request-if-this-issue-persists-please-contact-us-through-our-help-center-at-helpopenaicom)
+    - [Falta uma maior clareza nas mensagens de erro](#falta-uma-maior-clareza-nas-mensagens-de-erro)
+    - [Há muito truncamento de resposta](#há-muito-truncamento-de-resposta)
+    - [Tentei me cadastrar como usuário ChatGPT Plus, mas não está aberto para usuários fora dos EUA](#tentei-me-cadastrar-como-usuário-chatgpt-plus-mas-não-está-aberto-para-usuários-fora-dos-eua)
+    - [Melhor dividir em passos/perguntas menores](#melhor-dividir-em-passosperguntas-menores)
+    - [Exige compreensão dos conceitos](#exige-compreensão-dos-conceitos)
+    - [Às vezes é necessário apertar o botão “stop generating”](#às-vezes-é-necessário-apertar-o-botão-stop-generating)
+    - [Conclusão](#conclusão)
   - [Referências interessantes](#referências-interessantes)
 
 ## Contexto 
@@ -362,6 +385,90 @@ Observações complementares:
 
 
 ## Reflexões sobre o projeto
+
+As anotações abaixo precisam ser agrupadas e revisadas. Mas são alguns pontos importantes sobre a interação com o WebChatGPT durante todo o projeto.
+
+### Limitações
+#### Parece haver um limite no tamanho do texto gerado pelo WebChatGPT. 
+
+ Quando solicitei o relatório de compreensão do negócio, por 2 vezes ele interrompeu: a primeira sem a seção 1.4, a segunda só com a primeira frase dessa seção. Isso também aconteceu na seção 1.4.5 quando aumentei o número de métricas.
+
+#### Parece haver um limite no tamanho do prompt gerado pelo WebChatGPT. 
+
+Quando fui passar o diálogo anterior como contexto, recebi mensagem: The message you submitted was too long, please reload the conversation and submit something shorter.
+
+
+### Não sabe sempre
+Às vezes erra nos exemplos (ver caso de r-precision). O denominador não poderia ser maior do que o número de documentos relevantes.
+
+### Às vezes complica e parece inventar coisas
+Às vezes passa a fórmula mais complexa: ver caso da fórmula passada inicialmente para NCG. Baseava-se em DCG. Como estava acompanhando com a leitura de um artigo, solicitei que reformulasse baseando-se apenas em ICG (ideal).
+
+### Formato do prompt é importante
+O formato do prompt é importante. Para que ele entenda o que é para fazer. Solicitei para ele gerar apenas um complemento de uma seção, mas ele gerou a seção inteira.
+
+. Ele estava gerando fórmulas nem sempre em formato markdown  compreensíveis pelo github. A partir do comando “Importante: sempre escrever fórmulas em markdown compreensível pelo github”, as fórmulas vieram em formato certo.
+
+Pedi: A função search ficou incompleta. Favor gerar apenas o código da função search.
+. Muitas vezes gera tudo novamente. E diferente da versão anterior.
+
+### Funcionalidades faltando
+#### Falta um CRUD básico de chats no WebChatGPT
+Poderia possuir opção, por exemplo, de editar com exclusão de perguntas e respostas e reaplicar o chat.
+
+
+#### Poderia ler sites da web
+Perguntei: Você consegue ler sites da web?
+
+Resposta: Sim, como modelo de linguagem, eu posso ler e processar texto em sites da web, bem como em outros tipos de documentos. No entanto, como um assistente de linguagem, não tenho acesso direto à internet e não sou capaz de navegar na web. Meu papel é responder a perguntas e fornecer informações com base no meu conhecimento prévio, que foi adquirido a partir de um conjunto de dados limitado e treinamento supervisionado.
+
+### Inventa coisas
+Às vezes entra com um “papo” de que já está sabendo algo, no caso uma conversa anterior (presunçoso?).
+. Olá Marcus, é um prazer conversar com você e ser seu consultor no projeto. Claro, pode me chamar de CG e podemos começar sim. Já estou ciente da conversa anterior e li a seção correspondente no Github. Estou à disposição para ajudar nas próximas fases do projeto. Vamos em frente!
+. Estava ciente nada. Perguntei: “Se você sabe, gostaria de saber quais as métricas que compõem a seção 1.4 de métricas?”. E ele trouxe métricas diferentes. Daí recomecei o chat sem essas métricas incorretas.
+
+### Às vezes é pró-ativo
+Ele gerou uma Análise Exploratória de Dados da CISI Collection. Mas não era o que eu queria no momento. Precisei mudar o prompt.
+
+### Erros no sistema
+####  “An error occurred. If this issue persists please contact us through our help center at help.openai.com. “
+(Eu não havia colocado pergunta, apenas apresentado a contextualização e as fases pensadas para o desenvolvimento do projeto. Mudei para encerrar com a mensagem: “A seguir te passarei o relatório da Fase 1.” e deu certo.
+
+#### "Too many requests in 1 hour. Try again later."
+#### “ChatGPT is at capacity right now.  Get notified when we're back”
+
+#### “An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.”
+
+### Falta uma maior clareza nas mensagens de erro
+Quando a minha internet estava fora, deu a seguinte mensagem de erro:
+
+“An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.”
+
+### Há muito truncamento de resposta 
+Ocorreu várias vezes na geração do código BM25 que é um pouco maior.
+
+### Tentei me cadastrar como usuário ChatGPT Plus, mas não está aberto para usuários fora dos EUA
+. ChatGPT Plus is available to customers in the United States, and we will begin the process of inviting people from our waitlist over the coming weeks. We plan to expand access and support to additional countries and regions soon.
+
+. We love our free users and will continue to offer free access to ChatGPT. By offering this subscription pricing, we will be able to help support free access availability to as many people as possible.
+
+.Pedi para entrar na waitlist.
+
+
+### Melhor dividir em passos/perguntas menores
+Para obter respostas mais corretas (na codificação, principalmente)
+ 
+
+### Exige compreensão dos conceitos
+Sofri no BM25 com os erros nos códigos gerados. Tive que compreender toda a lógica para ajustar o código.
+
+### Às vezes é necessário apertar o botão “stop generating”
+No final, aprendi a usar “stop generating” quando via que de início ele seguia por caminhos equivocados.
+
+### Conclusão
+Achei muito enriquecedora a experiência. Foi de grande ajuda.
+
+Acredito  que serão criados treinamentos específicos para ensinar a codificar com o WebChatGPT, dando dicas sobre os formatos dos prompts e como conduzir uma conversa.
 
 ## Referências interessantes
 PAIVA, Clovis.Elasticsearch: entenda a teoria por trás do mecanismo de busca textual.In: medium.com.2020; Disponível em: [https://medium.com/tentando-ser-um-unic%C3%B3rnio/elasticsearch-entenda-a-teoria-por-tr%C3%A1s-do-mecanismo-de-busca-textual-86d11bd4f69d](https://medium.com/tentando-ser-um-unic%C3%B3rnio/elasticsearch-entenda-a-teoria-por-tr%C3%A1s-do-mecanismo-de-busca-textual-86d11bd4f69d). Acesso em: 22 fev. 2023. 
