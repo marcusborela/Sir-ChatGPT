@@ -100,7 +100,11 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 
 [Dúvidas avulsas (github, markdown, nomenclaturas, codificação fora do contexto de desenvolvimento, etc)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Dúvidas%20avulsas.md)
 
-A implementação e a avaliação da solução foram tratados em um único chat. Para legibilidade e clareza, separamos em 3 chats distintos que se seguem:
+A implementação e a avaliação da solução foram tratados em um único chat. 
+
+[Na fase de implementação, com todas as suas etapas, houve uma programação em par (pair programming) em um único chat](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/SirChatGPT%20desenvolvimento.md)
+
+Para legibilidade e clareza, dividimos esse chat em 3 chats complementares que se seguem:
 
 [Programação em Par (pair programming) para a codificação das etapas de coleta de dados e de pré-processamento](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Coleta%20de%20dados%20e%20pr%C3%A9-processamento.md)
 
@@ -110,10 +114,9 @@ A implementação e a avaliação da solução foram tratados em um único chat.
 [Programação em Par (pair programming) para a codificação da etapa de avaliação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Avaliação%20da%20busca.md)
 
 
-
 ## Relatório final
 ### Relatório Fase 1 - Compreensão do Negócio
-[(relatório abaixo foi criado integralmente pelo ChatGPT ao final do diálogo que inclui a contextualização até a conclusão da fase de compreensão dos conceitos envolvidos no negócio)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
+[(O relatório abaixo foi criado integralmente pelo ChatGPT ao final do diálogo que inclui a contextualização até a conclusão da fase de compreensão dos conceitos envolvidos no negócio. Só foi necessário um ajuste nas fórmulas das métricas r-precision e ncg.)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
 #### 1.1 CISI Collection
 A CISI Collection é um conjunto de dados coletados pelo Centro de Invenções e Informação Científica (CISI) e é composto por cerca de 1460 documentos e 112 consultas associadas. O objetivo dessa coleção é ser usada para construir modelos de recuperação de informação, em que uma determinada consulta retornará uma lista de IDs de documentos relevantes à consulta.
 #### 1.2 Information Retrieval System (IR system)
@@ -204,7 +207,7 @@ O MAP é uma medida útil para avaliar sistemas de recuperação de informaçõe
 ##### 1.4.5 R-Precision
 A métrica R-Precision é definida como a precisão dos primeiros R documentos recuperados para uma determinada consulta, onde R é o número de documentos relevantes para essa consulta. É uma métrica utilizada principalmente quando o número de documentos relevantes é conhecido. A fórmula para calcular a R-Precision é dada por:
 
-$$R-Precision = \frac{\text{Número de documentos relevantes nos primeiros R resultados}}{R}$$
+$$R-Precision = \frac{\text{Número de documentos relevantes nos primeiros R resultados}}{min(R, topk)}$$
 
 ##### 1.4.6 NCG (Normalized Cumulative Gain)
 A métrica NCG (Normalized Cumulative Gain) é utilizada para medir a eficácia de um sistema de recuperação de informação, levando em consideração a posição de cada item na lista de resultados. A métrica assume que as avaliações de relevância são binárias, ou seja, um item é relevante ou não relevante. A NCG normaliza a medida de ganho acumulado (CG) pelo ideal máximo de ganho acumulado (ICG), a fim de levar em conta o número de itens relevantes.
@@ -221,21 +224,22 @@ Onde:
 
 O ganho acumulado ideal (ICG) na posição $k$ é calculado da seguinte forma:
 
-$$ICG@k = \sum_{i=1}^k \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
+$$ICG@k = \sum_{i=1}^k relideal_i$$
 
 Onde:
 
-- $rel_i$ é o nível de relevância do documento na posição $i$ (0 ou 1).
+- $relideal_i$ é o nível de relevância do documento na posição $i$ (0 ou 1) considerando que todos os relevantes fossem retornados no início do resultado em ordem decrescente de relevância.
 
 
-Por exemplo, se houver $n$ documentos relevantes, o ganho acumulado ideal nas primeiras $k$ posições seria:
-
-$$ICG@k = \sum_{i=1}^k \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
-$$ICG@k = \frac{2^{rel_1} - 1}{\log_2(1+1)} + \frac{2^{rel_2} - 1}{\log_2(2+1)} + ... + \frac{2^{rel_n} - 1}{\log_2(n+1)}$$
 
 O ganho acumulado (CG) na posição $k$ é dado por:
 
-$$CG@k = \sum_{i=1}^k \frac{2^{rel_i} - 1}{\log_2(i+1)}$$
+$$CG@k = \sum_{i=1}^k rel_i$$
+
+Onde:
+
+- $rel_i$ é o nível de relevância do documento na posição $i$ (0 ou 1) dos documentos realmente retornados na busca.
+
 
 Assim, a métrica NCG varia de 0 a 1, onde valores mais próximos de 1 indicam um sistema mais eficaz na recuperação de informações relevantes.
 
@@ -305,7 +309,20 @@ A classe possui a seguinte funcionalidade:
 . search(query, k=5): método que busca os k documentos mais relevantes para a consulta query. O método recebe como parâmetros a consulta e o número de documentos a serem retornados.
 
 
-### Relatório Fase 3 - Avaliação 
+### Relatório Fase 3 - Avaliação de mecanismos de busca
+
+
+A tabela abaixo apresenta a média das métricas obtidas pelos mecanismos de busca avaliados:
+<table><thead><tr><th>Métrica</th><th>BM25</th><th>BM25 com penalização por tamanho do documento</th></tr></thead><tbody><tr><td>Precisão</td><td>0.2868</td><td>0.0211</td></tr><tr><td>R-Precisão</td><td>0.3016</td><td>0.0211</td></tr><tr><td>NCG</td><td>0.3016</td><td>0.0211</td></tr></tbody></table>
+
+Com base nos resultados obtidos, podemos concluir que para a coleção CISI o mecanismo_bm25 teve um desempenho significativamente melhor do que o mecanismo_bm25_penaliza_tamanho em relação às métricas apuradas de precisão, r-precisão e ncg (Normalized Cumulative Gain).
+
+
+Observações complementares:
+. No caso da coleção CISI, como não há valor de relevância diferente de um, a aplicabilidade da métrica ncg fica comprometida. Algo a investigar é se nesses casos o valor de ncg se equivale ao de r-precision, conforme foi apurado nos cálculos. 
+
+. O mesmo resultado nas 3 métricas para o mecanismo BM25 com penalização por tamanho do documento é estranho. Os códigos das métricas e os cálculos foram testados para diferentes consultas e para todos os mecanismos. E não foi encontrada causa desse comportamento. Não se  descarta a necessidade de uma nova revisão do código. Mas sugere-se começar por uma avaliação se foi correto o uso da library rank_bm25 com sua classe M25Okapi.
+
 
 ## Reflexões sobre o projeto
 
