@@ -6,6 +6,45 @@ Development of a Simple Informational Retrieval System obtaining guidance with C
 ### Autor: 
 Marcus Vinícius Borela de Castro (<marcusborela@yahoo.com.br>) 
 
+## Índice
+
+- [SIR\_ChatGPT](#sir_chatgpt)
+    - [Github do Projeto:](#github-do-projeto)
+    - [Autor:](#autor)
+  - [Índice](#índice)
+  - [Contexto](#contexto)
+    - [Project Overview:](#project-overview)
+    - [Project Outcomes:](#project-outcomes)
+    - [Project Requirements:](#project-requirements)
+    - [Project Deliverables:](#project-deliverables)
+    - [Evaluation:](#evaluation)
+  - [Estudo prévio sobre ChatGpt](#estudo-prévio-sobre-chatgpt)
+    - [Sites com reflexões e dicas sobre o chatbot](#sites-com-reflexões-e-dicas-sobre-o-chatbot)
+    - [Extensões do Google Chrome](#extensões-do-google-chrome)
+  - [Conversas preliminares](#conversas-preliminares)
+  - [Desenvolvimento do projeto](#desenvolvimento-do-projeto)
+    - [Chats durante o desenvolvimento da solução](#chats-durante-o-desenvolvimento-da-solução)
+    - [Relatório Fase 1 - Compreensão do Negócio](#relatório-fase-1---compreensão-do-negócio)
+      - [1.1 CISI Collection](#11-cisi-collection)
+      - [1.2 Information Retrieval System (IR system)](#12-information-retrieval-system-ir-system)
+      - [1.3 BM25](#13-bm25)
+      - [1.4 Métricas de Relevância para Avaliação de IR](#14-métricas-de-relevância-para-avaliação-de-ir)
+    - [Precisão (Precision)](#precisão-precision)
+        - [Revocação (Recall)](#revocação-recall)
+        - [F1-Score](#f1-score)
+        - [Mean Average Precision (MAP)](#mean-average-precision-map)
+        - [1.4.5 R-Precision](#145-r-precision)
+        - [1.4.6 NCG (Normalized Cumulative Gain)](#146-ncg-normalized-cumulative-gain)
+    - [Relatório Fase 2 - Implementação](#relatório-fase-2---implementação)
+      - [Coleta de dados da CISI Collection](#coleta-de-dados-da-cisi-collection)
+      - [Pré-processamento dos textos de documentos e consultas](#pré-processamento-dos-textos-de-documentos-e-consultas)
+      - [Implementação de dois mecanismos de busca com BM25](#implementação-de-dois-mecanismos-de-busca-com-bm25)
+        - [BM25](#bm25)
+        - [BM25\_Penaliza\_Tamanho\_Docto](#bm25_penaliza_tamanho_docto)
+    - [Relatório Fase 3 - Avaliação de mecanismos de busca](#relatório-fase-3---avaliação-de-mecanismos-de-busca)
+  - [Reflexões sobre o projeto](#reflexões-sobre-o-projeto)
+  - [Referências interessantes](#referências-interessantes)
+
 ## Contexto 
 (deixei próximas seções em inglês para ser fiel à documentação recebida da Unicamp).
 
@@ -53,14 +92,12 @@ The project will be evaluated based on the following criteria:
 - Quality of the report
 - Code readability and commenting
 - How chatGPT was used
-##
 ## Estudo prévio sobre ChatGpt 
 Antes de iniciar o projeto assistido pelo ChatGPT, precisava me atualizar sobre suas capacidades e desejava descobrir algumas ferramentas de apoio. Por isso criei esta seção.
 
 Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 
 “ChatGPT é um modelo de linguagem de inteligência artificial criado pela OpenAI. Ele é projetado para conversar com usuários em linguagem natural, respondendo a perguntas, fornecendo informações e até mesmo fazendo pequenas conversas. O ChatGPT foi treinado em uma grande quantidade de dados de linguagem natural para aprender a entender a linguagem humana e gerar respostas relevantes e coerentes. Ele é capaz de conversar sobre uma ampla variedade de tópicos e pode ser usado em diversas aplicações, desde assistentes de bate-papo em sites até chatbots em redes sociais.”
-### Recursos
 ### Sites com reflexões e dicas sobre o chatbot
 1. [Chatbots interessantes](https://olhardigital.com.br/2023/02/14/internet-e-redes-sociais/10-chatbots-similares-ao-chatgpt-para-voce-testar/)
 1. [Google emite “alerta vermelho” após ChatGPT](https://www.showmetech.com.br/chatgpt-faz-google-emitir-alerta-vermelho/)
@@ -75,7 +112,8 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 1. [ChatGPT tutorial: How to improve your work with ChatGPT](https://lablab.ai/t/chatgpt-how-to-improve-your-work-with-chatgpt)
 1. [Get The Best ChatGPT Experience With These 10 Chrome Extensions](https://geekflare.com/best-chatgpt-chrome-extensions/)
 
-### Extensões do Google Chrome (em ordem de importância, critério subjetivo do autor)
+### Extensões do Google Chrome 
+(em ordem de importância, critério subjetivo do autor)
 1. [WebChatGPT: ChatGPT com acesso à internet](https://chrome.google.com/webstore/detail/webchatgpt-chatgpt-with-i/lpfemeioodjbpieminkklglpmhlngfcn): permite busca informações atualizadas. Como o gpt-3 foi treinado em 2021, ele não traz respostas atualizadas (exemplo: quem é o presidente do Brasil?). Essa extensão permite que o chatgpt faça uma busca atualizada (configurável: período, número de resultados, etc) o que o torna ainda mais utilizável.
 1. [YouTube Summary with ChatGPT](https://chrome.google.com/webstore/detail/youtube-summary-with-chat/nmmicjeknamkfloonkhhcjmomieiodli): gera sumário do vídeo no youtube
 1. [FancyGPT](https://chrome.google.com/webstore/detail/fancygpt/meonalmakdjaojaoipfhahcfccoecegk?hl=pt-BR): salva como pdf, txt ou imagem (jpg).
@@ -95,10 +133,10 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 ## Desenvolvimento do projeto
 
 ### Chats durante o desenvolvimento da solução
-[Contextualização do projeto, definção de fases e execução da fase compreensão do negócio, incluindo a criação do Relatório Fase 1 (ver abaixo)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
+[Contextualização do projeto, definção de fases e execução da fase compreensão do negócio, incluindo a criação do Relatório Fase 1 (ver abaixo)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/SirChatGPT%20desenvolvimento.md)
 
 
-[Dúvidas avulsas (github, markdown, nomenclaturas, codificação fora do contexto de desenvolvimento, etc)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Dúvidas%20avulsas.md)
+[Dúvidas avulsas (github, markdown, nomenclaturas, codificação fora do contexto de desenvolvimento, etc)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/D%C3%BAvidas%20avulsas.md)
 
 A implementação e a avaliação da solução foram tratados em um único chat. 
 
@@ -111,10 +149,9 @@ Para legibilidade e clareza, dividimos esse chat em 3 chats complementares que s
 
 [Programação em Par (pair programming) para a codificação da etapa de implementação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Implementa%C3%A7%C3%A3o%20mecanismos%20de%20busca.md)
 
-[Programação em Par (pair programming) para a codificação da etapa de avaliação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Avaliação%20da%20busca.md)
+[Programação em Par (pair programming) para a codificação da etapa de avaliação do mecanismo de busca](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Avalia%C3%A7%C3%A3o%20de%20mecanismo%20de%20busca.md)
 
 
-## Relatório final
 ### Relatório Fase 1 - Compreensão do Negócio
 [(O relatório abaixo foi criado integralmente pelo ChatGPT ao final do diálogo que inclui a contextualização até a conclusão da fase de compreensão dos conceitos envolvidos no negócio. Só foi necessário um ajuste nas fórmulas das métricas r-precision e ncg.)](https://github.com/marcusborela/Sir-ChatGPT/blob/main/docs/Desenvolvendo%20em%20conjunto%20com%20WebChatGPT/Contextualizacao%20e%20compreensao%20do%20negocio.md)
 #### 1.1 CISI Collection
