@@ -42,7 +42,7 @@ Marcus Vinícius Borela de Castro (<marcusborela@yahoo.com.br>)
         - [BM25](#bm25)
         - [BM25\_Penaliza\_Tamanho\_Docto](#bm25_penaliza_tamanho_docto)
     - [Relatório Fase 3 - Avaliação de mecanismos de busca](#relatório-fase-3---avaliação-de-mecanismos-de-busca)
-  - [Reflexões sobre o projeto](#reflexões-sobre-o-projeto)
+  - [Reflexões sobre a interação com o ChatGPT](#reflexões-sobre-a-interação-com-o-chatgpt)
     - [Limitações](#limitações)
       - [Parece haver um limite no tamanho do texto gerado pelo WebChatGPT.](#parece-haver-um-limite-no-tamanho-do-texto-gerado-pelo-webchatgpt)
       - [Parece haver um limite no tamanho do prompt gerado pelo WebChatGPT.](#parece-haver-um-limite-no-tamanho-do-prompt-gerado-pelo-webchatgpt)
@@ -139,8 +139,8 @@ Perguntei ao ChatGPT “o que é ChatGPT”, e ele respondeu:
 (em ordem de importância, critério subjetivo do autor)
 1. [WebChatGPT: ChatGPT com acesso à internet](https://chrome.google.com/webstore/detail/webchatgpt-chatgpt-with-i/lpfemeioodjbpieminkklglpmhlngfcn): permite busca informações atualizadas. Como o gpt-3 foi treinado em 2021, ele não traz respostas atualizadas (exemplo: quem é o presidente do Brasil?). Essa extensão permite que o chatgpt faça uma busca atualizada (configurável: período, número de resultados, etc) o que o torna ainda mais utilizável.
 1. [YouTube Summary with ChatGPT](https://chrome.google.com/webstore/detail/youtube-summary-with-chat/nmmicjeknamkfloonkhhcjmomieiodli): gera sumário do vídeo no youtube
-1. [FancyGPT](https://chrome.google.com/webstore/detail/fancygpt/meonalmakdjaojaoipfhahcfccoecegk?hl=pt-BR): salva como pdf, txt ou imagem (jpg).
-1. [ChatGPT for Google](https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf): responde em pesquisas no google. Configurável, permite, por exemplo, apagar de forma automática os chats no openai.
+magem (jpg).
+1. [ChatGPT for Google](https://chrome.google.com/webstore/detail/chatgpt-for-google/jgjaeacdkonaoafenlfkkkmbaopkbilf): responde em pesquisas no google. Configurável, permite, por exemplo, apagar de forma automática os chats no openai.1. [FancyGPT](https://chrome.google.com/webstore/detail/fancygpt/meonalmakdjaojaoipfhahcfccoecegk?hl=pt-BR): salva como pdf, txt ou i
 1. [AI Content Detector - Copyleaks](https://chrome.google.com/webstore/detail/ai-content-detector-copyl/gplcmncpklkdjiccbknjjkoidpgkcakd?hl=pt-BR): avalia se página (ou texto) foi gerada por robô.
 1. [ChatGPT Prompt Genius](https://chrome.google.com/webstore/detail/chatgpt-prompt-genius/jjdnakkfjnnbbckhifcfchagnpofjffo): salva a história de chats localmente (podem ser exportados, tornando públicos). Bom para não depender apenas da OpenAi que está sendo sobrecarregada. Permite consulta de outros chats público. E exportar conversa para pdf/html/png/markdown. Código aberto no [GitHub](https://github.com/benf2004/ChatGPT-Prompt-Genius). 
 1. [Copy for Chat GPT](https://chrome.google.com/webstore/detail/copy-for-chat-gpt/mloblghgjiagjdffmgobhbgmplhongpm): permite copiar a resposta e passar por um detector de plágio (Atalho: CMD + k). Código aberto.
@@ -384,7 +384,7 @@ Observações complementares:
 . O mesmo resultado nas 3 métricas para o mecanismo BM25 com penalização por tamanho do documento é estranho. Os códigos das métricas e os cálculos foram testados para diferentes consultas e para todos os mecanismos. E não foi encontrada causa desse comportamento. Não se  descarta a necessidade de uma nova revisão do código. Mas sugere-se começar por uma avaliação se foi correto o uso da library rank_bm25 com sua classe M25Okapi.
 
 
-## Reflexões sobre o projeto
+## Reflexões sobre a interação com o ChatGPT
 
 As anotações abaixo precisam ser agrupadas e revisadas. Mas são alguns pontos importantes sobre a interação com o WebChatGPT durante todo o projeto.
 
