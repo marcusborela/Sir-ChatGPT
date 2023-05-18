@@ -1,6 +1,7 @@
 ﻿# SIR\_ChatGPT
 Development of a Simple Informational Retrieval System obtaining guidance with ChatGPT. Tested on CISI collection with BM25 algorithm.
 
+
 ### Github do Projeto: 
 <https://github.com/marcusborela/Sir-ChatGPT.git> 
 ### Autor: 
@@ -72,6 +73,8 @@ Marcus Vinícius Borela de Castro (<marcusborela@yahoo.com.br>)
 (deixei próximas seções em inglês para ser fiel à documentação recebida da Unicamp).
 
 Unicamp Training Selection. Exercise for special student selection - Course "Deep Learning applied to searches", FEEC-Unicamp, first half of 2023.
+
+[Projects developed (and other chats) after admission are pulic in github](https://github.com/marcusborela/deep_learning_em_buscas_unicamp)
 
 Objective
 
